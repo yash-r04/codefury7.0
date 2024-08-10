@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+<body>
+    
+    <!-- <form id="forgotPasswordForm">
+        <h2>Forgot Password</h2>
+        <label for="forgotEmail">Email:</label>
+        <input type="email" id="forgotEmail" name="email" required><br>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required><br>
+        <button type="submit">Reset Password</button>
+    </form> -->
+    <div class="flex flex-col items-center justify-center px-40 py-40">
+        <form id="forgotPasswordForm" class="bg-gray-100 p-6 border border-gray-300 rounded-md w-82 align-middle">
+            <h2 class="text-xl font-semibold text-orange-600 mb-4">Forgot Password ?</h2>
+            <label for="forgotEmail" class="block text-gray-700 font-bold mb-2">Email:</label>
+            <input type="email" id="forgotEmail" name="email" required
+                   class="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-600">
+            <label for="newPassword" class="block text-gray-700 font-bold mb-2">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required
+                   class="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-600">
+            <button type="submit" class="w-full p-2 bg-orange-600 text-white font-bold rounded-md hover:bg-orange-700">
+                Reset Password
+            </button>
+            
+            <div class="mt-4 text-center">
+                <p class="text-gray-600">Remember your password? 
+                    <a href="/signIn.html" class="text-orange-600 hover:underline">Login here</a>
+                </p>
+                
+            </div>
+        </form>
+        
+    </div>
+    <script>
+        document.getElementById('forgotPasswordForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/api/auth/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const message = await response.text();
+            const a=message;
+            alert(a);
+        });
+    </script>
+</body>
+</html>
