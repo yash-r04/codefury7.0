@@ -96,6 +96,7 @@
                 >
               </div>
               <button
+                id="signInButton"
                 type="submit"
                 class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
@@ -115,25 +116,35 @@
       </div>
     </section>
     <script>
-      document
-        .getElementById("signinForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
-          const formData = new FormData(event.target);
-          const data = Object.fromEntries(formData.entries());
+      document.getElementById("signinForm").addEventListener("submit", async function (event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
 
-          const response = await fetch("/api/auth/signin", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
+  try {
+    const response = await fetch("/api/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-          const result = await response.text();
-          const a = result.token ? "Sign in successful" : result;
-          alert(a);
-        });
+    const result = await response.text();
+    if (result.token) {
+  alert("Sign in successful");
+  console.log("Redirecting to the desired link...");
+  window.location.href = "http://127.0.0.1:5000"; // Replace with your actual link
+} else {
+      // Handle other scenarios (e.g., display an error message)
+      alert(result);
+    }
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    // Handle any error scenarios (e.g., display an error message to the user)
+  }
+});
+
     </script>
   </body>
 </html>
