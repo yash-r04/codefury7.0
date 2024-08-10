@@ -67,6 +67,44 @@ app.get('/api/user', async (req, res) => {
 });
 
 
+const volSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  state: { type: String, required: true },
+  pincode: { type: String, required: true },
+  steps: { type: String, required: true }
+});
+const Vol = mongoose.model('Vol', volSchema);
+
+app.post('/registerVol', async (req, res) => {
+  const { name, email, state, pincode, steps } = req.body;
+  try {
+    
+    if (!name || !email || !state || !pincode) {
+      return res.status(400).json({ msg: 'Please fill all fields' });
+    }
+
+    
+    const newUser = new Vol({ name, email, state, pincode, steps });
+    await newUser.save();
+    res.status(201).json({ msg: 'User registered successfully' });
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error', error });
+  }
+});
+
+app.get('/api/Vol', async (req, res) => {
+  try {
+    const users = await Vol.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error', error });
+  }
+});
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
