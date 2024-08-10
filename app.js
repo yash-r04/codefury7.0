@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'views')));
 
@@ -55,6 +56,16 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ msg: 'Server error', error });
   }
 });
+
+app.get('/api/user', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ msg: 'Server error', error });
+  }
+});
+
 
 
 app.listen(port, () => {
