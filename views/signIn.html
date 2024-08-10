@@ -116,35 +116,38 @@
       </div>
     </section>
     <script>
-      document.getElementById("signinForm").addEventListener("submit", async function (event) {
-  event.preventDefault(); // Prevent the default form submission behavior
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData.entries());
-
-  try {
-    const response = await fetch("/api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.text();
-    if (result.token) {
-  alert("Sign in successful");
-  console.log("Redirecting to the desired link...");
-  window.location.href = "http://127.0.0.1:5000"; // Replace with your actual link
-} else {
-      // Handle other scenarios (e.g., display an error message)
-      alert(result);
-    }
-  } catch (error) {
-    console.error("Error during sign-in:", error);
-    // Handle any error scenarios (e.g., display an error message to the user)
-  }
-});
-
+      document
+        .getElementById("signinForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent the default form submission behavior
+          const formData = new FormData(event.target);
+          const data = Object.fromEntries(formData.entries());
+    
+          try {
+            const response = await fetch("/api/auth/signin", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+    
+            const result = await response.json(); // Assuming server responds with JSON
+            if (result.token) {
+              alert("Sign in successful");
+              console.log("Redirecting to the desired link...");
+              window.location.href = "http://127.0.0.1:5000"; // Redirect to the desired URL
+            } else {
+              // Handle other scenarios (e.g., display an error message)
+              alert(result.message || "Sign in failed");
+            }
+          } catch (error) {
+            console.error("Error during sign-in:", error);
+            // Handle any error scenarios (e.g., display an error message to the user)
+            alert("An error occurred during sign-in. Please try again.");
+          }
+        });
     </script>
+    
   </body>
 </html>
