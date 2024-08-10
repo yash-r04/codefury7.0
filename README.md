@@ -6,3 +6,13 @@
 5>cmd: npm i concurrently --save-dev
 6>npm run startBoth
 7>localhost:3000
+
+
+
+
+
+## Recovery commands untill homwpage with no integration
+git switch -c temp-branch
+git switch main
+git reset --hard 3c60841
+git push origin main --force

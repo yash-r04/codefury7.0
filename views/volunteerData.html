@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Data Table</title>
+    <title>Volunteer Data Table</title>
     <style>
         table {
             width: 100%;
@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <h1 id="pageTitle">Victims Details</h1>
+    <h1 id="pageTitle">Volunteer Details</h1>
     <table id="dataTable">
         <thead id="tableHead"></thead>
         <tbody id="tableBody"></tbody>
@@ -39,10 +39,10 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const response = await fetch('/api/user');
+                const response = await fetch('/api/Vol');
                 const data = await response.json();
-                generateTable('User Data', ['Name', 'Email', 'Contact Number', 'State', 'Pincode'], 
-                    data.map(user => [user.name, user.email, user.contactNumber, user.state, user.pincode]));
+                generateTable('Volunteer Data', ['Name', 'Email', 'Stater', 'Pincode', 'Volunteering Steps'], 
+                    data.map(user => [user.name, user.email, user.state, user.pincode, user.steps]));
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -56,7 +56,7 @@
             doc.text(document.getElementById('pageTitle').textContent, 10, 10);
             
             // Get table data
-            const headers = ['Name', 'Email', 'Contact Number', 'State', 'Pincode'];
+            const headers = ['Name', 'Email', 'State', 'Pincode', 'Volunteering Steps'];
             const rows = Array.from(document.querySelectorAll('#dataTable tr')).slice(1).map(tr => 
                 Array.from(tr.querySelectorAll('td')).map(td => td.textContent)
             );
@@ -69,7 +69,7 @@
             });
 
             // Save the PDF
-            doc.save('data.pdf');
+            doc.save('vol.pdf');
         });
 
         function generateTable(title, headers, rows) {
