@@ -4,30 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer Data Table</title>
+    <link href="output.css" rel="stylesheet">
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
         }
         button {
             margin: 20px 0;
         }
     </style>
 </head>
-<body>
-    <h1 id="pageTitle">Volunteer Details</h1>
-    <table id="dataTable">
-        <thead id="tableHead"></thead>
-        <tbody id="tableBody"></tbody>
-    </table>
-    <button id="printButton">Print</button>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6">
+        <h1 id="pageTitle" class="text-3xl font-bold text-gray-800 mb-6">Volunteer Details</h1>
+        <div class="overflow-x-auto">
+            <table id="dataTable" class="min-w-full bg-white shadow-md rounded-lg border border-gray-200">
+                <thead id="tableHead" class="bg-gray-200 text-gray-600 uppercase text-sm">
+                    <!-- Table headers will be inserted here -->
+                </thead>
+                <tbody id="tableBody" class="text-gray-700">
+                    <!-- Table rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+        <button id="printButton" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            Print
+        </button>
+    </div>
 
     <!-- Include jsPDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -41,10 +45,10 @@
             try {
                 const response = await fetch('/api/Vol');
                 const data = await response.json();
-                generateTable('Volunteer Data', ['Name', 'Email', 'Stater', 'Pincode', 'Volunteering Steps'], 
-                    data.map(user => [user.name, user.email, user.state, user.pincode, user.steps]));
+                generateTable('Volunteer Data', ['Name', 'Email', 'State', 'Pincode', 'Volunteering Steps'], 
+                    data.map(volunteer => [volunteer.name, volunteer.email, volunteer.state, volunteer.pincode, volunteer.steps]));
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                console.error('Error fetching volunteer data:', error);
             }
         });
 
@@ -83,6 +87,7 @@
             headers.forEach(header => {
                 const th = document.createElement('th');
                 th.textContent = header;
+                th.className = 'py-3 px-4 text-left'; // Apply classes as a single string
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
@@ -92,6 +97,7 @@
                 rowData.forEach(cellData => {
                     const td = document.createElement('td');
                     td.textContent = cellData;
+                    td.className = 'py-3 px-4 border-t'; // Apply classes as a single string
                     row.appendChild(td);
                 });
                 tbody.appendChild(row);
