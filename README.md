@@ -11,7 +11,7 @@ Our Web application solves the given problem statement on Disaster Management an
    
    iv) radius - admin can set the radius around the disaster prone area in terms of kilometers
    
-4. **home page** has the following feature:
+4. **Home page** has the following feature:
    
    i) Call for volunteers who can help the peeple in need
    
