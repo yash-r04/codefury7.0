@@ -16,10 +16,29 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+// router.post('/signin', async (req, res) => {
+//     const { email, password } = req.body;
+//     try {
+//         const admin = await Admin.findOne({ email });
+//         if (!admin) return res.status(400).send('Invalid email or password');
+
+//         const isMatch = await bcrypt.compare(password, admin.password);
+//         if (!isMatch) return res.status(400).send('Invalid email or password');
+
+//         const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//         res.json({ token });
+//         // res.send("SigIn Successfull")
+//     } catch (error) {
+//         res.status(400).json({ error: 'Invalid email or password' });
+
+//     }
+// });
 router.post('/signin', async (req, res) => {
     const { email, password } = req.body;
+    
     try {
         const admin = await Admin.findOne({ email });
+        
         if (!admin) return res.status(400).send('Invalid email or password');
 
         const isMatch = await bcrypt.compare(password, admin.password);
@@ -27,10 +46,9 @@ router.post('/signin', async (req, res) => {
 
         const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
-        // res.send("SigIn Successfull")
     } catch (error) {
+        console.error('Sign-in error:', error); // Debugging line
         res.status(400).json({ error: 'Invalid email or password' });
-
     }
 });
 
