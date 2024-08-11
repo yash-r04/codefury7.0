@@ -1,31 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <a
-      href="/signIn.html"
-      class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-      >Sign In</a
-    >
-    <a
-      href="/signUp.html"
-      class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-      >Sign Up</a
-    >
-    <a
-      href="/userData.html"
-      class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-      >GetUserData</a
-    >
-    <a
-      href="/volunteerData.html"
-      class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-      >GetVolunteerData</a
-    >
-    <!-- <a href="http://127.0.0.1:5000" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">go to maps</a> -->
-  </body>
+    <title>Interactive Cards</title>
+    <link href="output.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div class="p-6 max-w-4xl w-full">
+        <!-- Heading -->
+        <div class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-gray-800">Welcome Admin</h1>
+            <p class="text-gray-600 mt-2">Manage your account and data efficiently</p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Sign In -->
+            <div class="card bg-white rounded-lg shadow-lg overflow-hidden w-full md:w-80 lg:w-96 h-56 md:h-64 lg:h-72">
+                <div class="p-6 flex flex-col justify-between h-full">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Sign In</h2>
+                        <p class="text-gray-600 mb-4">Log in to your account and start managing your activities.</p>
+                    </div>
+                    <a href="/signIn.html" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 self-start">Go to Sign In</a>
+                </div>
+            </div>
+            <!-- Card 2: Sign Up -->
+            <div class="card bg-white rounded-lg shadow-lg overflow-hidden w-full md:w-80 lg:w-96 h-56 md:h-64 lg:h-72">
+                <div class="p-6 flex flex-col justify-between h-full">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Sign Up</h2>
+                        <p class="text-gray-600 mb-4">Create a new account to start using our services.</p>
+                    </div>
+                    <a href="/signUp.html" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300 self-start">Go to Sign Up</a>
+                </div>
+            </div>
+            <!-- Card 3: Get User Data -->
+            <div class="card bg-white rounded-lg shadow-lg overflow-hidden w-full md:w-80 lg:w-96 h-56 md:h-64 lg:h-72">
+                <div class="p-6 flex flex-col justify-between h-full">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Get User Data</h2>
+                        <p class="text-gray-600 mb-4">Access and manage user data from our platform.</p>
+                    </div>
+                    <a href="/userData.html" class="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition duration-300 self-start">View User Data</a>
+                </div>
+            </div>
+            <!-- Card 4: Get Volunteer Data -->
+            <div class="card bg-white rounded-lg shadow-lg overflow-hidden w-full md:w-80 lg:w-96 h-56 md:h-64 lg:h-72">
+                <div class="p-6 flex flex-col justify-between h-full">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Get Volunteer Data</h2>
+                        <p class="text-gray-600 mb-4">View and manage volunteer data efficiently.</p>
+                    </div>
+                    <a href="/volunteerData.html" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300 self-start">View Volunteer Data</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
